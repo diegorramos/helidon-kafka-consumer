@@ -1,0 +1,12 @@
+server:
+  port: 8080
+  host: 0.0.0.0
+
+app:
+  kafka:
+    bootstrap.servers: localhost:9092
+    #    compression: snappy
+    #    compression: lz4
+    #    compression: zstd
+    #    compression: gzip
+    topic: messaging-test-topic-${app.kafka.compression}-compressed

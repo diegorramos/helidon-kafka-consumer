@@ -1,0 +1,37 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: helidon-kafka-consumer
+  labels:
+    app: helidon-kafka-consumer
+spec:
+  type: ClusterIP
+  selector:
+    app: helidon-kafka-consumer
+  ports:
+    - name: tcp
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: helidon-kafka-consumer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: helidon-kafka-consumer
+  template:
+    metadata:
+      labels:
+        app: helidon-kafka-consumer
+        version: v1
+    spec:
+      containers:
+      - name: helidon-kafka-consumer
+        image: helidon-kafka-consumer
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8080
